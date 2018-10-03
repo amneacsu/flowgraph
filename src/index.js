@@ -1,10 +1,7 @@
-const canvas = document.createElement('canvas');
-const context = canvas.getContext('2d');
+import Stage from './Stage.js';
+import Node from './Node.js';
 
-canvas.width = 1000;
-canvas.height = 800;
-
-document.body.appendChild(canvas);
+const stage = new Stage();
 
 const state = {
   nodes: [],
@@ -12,13 +9,10 @@ const state = {
   draggingOutputIndex: null,
 };
 
-const addNode = (node) => {
-  state.nodes.push({
-    ...node,
-    render(context) {
-      context.fillRect(this.x, this.y, this.width, this.height);
-    },
-  });
+const addNode = (params) => {
+  const node = new Node(stage, params);
+
+  state.nodes.push(node);
 };
 
 addNode({
@@ -28,13 +22,8 @@ addNode({
   height: 127,
 });
 
-canvas.onclick = (e) => {
-  const x = e.offsetX;
-  const y = e.offsetY;
-};
-
 const tick = () => {
-  state.nodes.forEach(node => node.render(context));
+  state.nodes.forEach(node => node.render(stage.context));
 
   window.requestAnimationFrame(tick);
 };
