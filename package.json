@@ -1,0 +1,12 @@
+{
+  "name": "dsp",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "hs -o"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
